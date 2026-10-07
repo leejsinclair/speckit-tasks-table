@@ -1,0 +1,36 @@
+schema_version: "1.0"
+
+preset:
+  id: "task-table"
+  name: "Task Table"
+  version: "1.0.0"
+  description: "Adds a human-readable task table (task name, est. hours, when complete, sub-tasks) to plan.md"
+  author: "Lee Sinclair"
+  repository: "https://github.com/leejsinclair/speckit-tasks-table"
+  license: "MIT"
+
+requires:
+  # Composition strategies (append) were introduced in 0.8.0
+  speckit_version: ">=0.8.0"
+
+provides:
+  templates:
+    # Adds the "Task Table" section to the end of whatever plan template is
+    # otherwise in effect (core, extension, or a lower-priority preset).
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-task-table.md"
+      description: "Task Table section appended to the plan template"
+      strategy: "append"
+
+    # Tells the planning command how to fill the table in.
+    - type: "command"
+      name: "speckit.plan"
+      file: "commands/speckit.plan.task-table.md"
+      description: "Task Table instructions appended to the plan command"
+      strategy: "append"
+
+tags:
+  - "plan"
+  - "tasks"
+  - "estimation"
